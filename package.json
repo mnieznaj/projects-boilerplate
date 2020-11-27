@@ -1,0 +1,32 @@
+{
+  "name": "react-ts-scss-boilerplate",
+  "version": "1.0.0",
+  "description": "react-ts-scss-boilerplate",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon --watch webpack.* --exec \"npm run start\"",
+    "start": "wp --mode development",
+    "build": "wp --mode production"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/preset-env": "^7.12.1",
+    "@svgr/webpack": "^5.5.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^5.0.1",
+    "mini-css-extract-plugin": "^1.3.1",
+    "nodemon": "^2.0.6",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.1.0",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^8.0.11",
+    "typescript": "^4.1.2",
+    "webpack": "^5.5.1",
+    "webpack-merge": "^5.4.0",
+    "webpack-nano": "^1.1.0",
+    "webpack-plugin-serve": "^1.2.0"
+  }
+}
