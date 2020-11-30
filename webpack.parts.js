@@ -70,6 +70,22 @@ exports.devServer = () => ({
 // exports.page = ({ title }) => ({
 //   plugins: [new MiniHtmlWebpackPlugin({ context: { title } })],
 // });
+exports.svgrLoader = () => ({
+  module: {
+    rules:{
+      test: /\.svg$/,
+      use: ['@svgr/webpack'], //svgr loader for svg as component
+    }
+  }
+});
+exports.fontsLoader = () => ({
+  module: {
+    rules:{
+      test: /\.(ttf|eot|woff|woff2)$/,
+      type: "asset/resource",
+    },
+  }
+});
 
 exports.loadCSS = () => ({
   module: {

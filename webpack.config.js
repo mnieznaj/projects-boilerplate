@@ -5,17 +5,8 @@ const parts = require("./webpack.parts");
 const commonConfig = merge([
   { entry: ["./src"] },
   parts.cleanWebpack(),
-  parts.page({ title: "Demo" }),
   parts.loadImages({ limit: 15000 }),
-  { test: /\.svg$/, type: "asset" },
-  {
-    test: /\.svg$/,
-    use: ['@svgr/webpack'], //svgr loader for svg as component
-  },
-  {
-    test: /\.(ttf|eot|woff|woff2)$/,
-    type: "asset/resource",
-  },
+  // { test: /\.svg$/, type: "asset" },
   parts.loadCSS(),
   parts.extractCSS(),
   parts.sassLoader(),
