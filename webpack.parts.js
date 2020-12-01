@@ -59,10 +59,10 @@ exports.urlLoader = () => ({
 
 exports.devServer = () => ({
   watch: true,
-  // watchOptions: {
-  //   poll: true,
-  //   ignored: /node_modules/
-  // },
+  watchOptions: {
+    poll: true,
+    ignored: /node_modules/
+  },
   devServer: {
     // contentBase: path.join(__dirname, 'dist'),
     contentBase: path.join(__dirname, 'dist'),
@@ -79,18 +79,18 @@ exports.devServer = () => ({
 
 exports.svgrLoader = () => ({
   module: {
-    rules:{
+    rules:[{
       test: /\.svg$/,
       use: ['@svgr/webpack'], //svgr loader for svg as component
-    }
+    }]
   }
 });
 exports.fontsLoader = () => ({
   module: {
-    rules:{
+    rules:[{
       test: /\.(ttf|eot|woff|woff2)$/,
       type: "asset/resource",
-    },
+    }],
   }
 });
 
@@ -139,9 +139,8 @@ exports.extractCSS = ({ options = {}, loaders = [] } = {}) => {
     ],
   };
 };
-exports.cleanWebpack = () => {
-    return {plugins: [new CleanWebpackPlugin()]}
-};
+exports.cleanWebpack = () => ({plugins: [new CleanWebpackPlugin()]});
+
 exports.loadImages = ({ limit } = {}) => ({
   module: {
     rules: [
