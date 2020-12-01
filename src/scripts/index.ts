@@ -1,1 +1,1 @@
-document.write("boiler")
+document.write("boiler");

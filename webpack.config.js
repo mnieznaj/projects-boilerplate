@@ -11,6 +11,7 @@ const commonConfig = merge([
       path: path.resolve(__dirname, 'dist')
     }
   },
+  parts.htmlWebpackPlugin(),
   parts.loadImages({ limit: 15000 }),
   // { test: /\.svg$/, type: "asset" },
   parts.loadCSS(),

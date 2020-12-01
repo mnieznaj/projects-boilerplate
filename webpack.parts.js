@@ -1,8 +1,19 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 const APP_SOURCE = path.join(__dirname, "src");
+
+exports.htmlWebpackPlugin = () => ({
+  plugins: [new HtmlWebpackPlugin(
+    {
+      title: "Boilerplate",
+      meta: {viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no'}
+    }
+  )]
+})
 
 exports.loadTypeScript = () => ({
   devtool: 'inline-source-map',
@@ -48,14 +59,21 @@ exports.urlLoader = () => ({
 
 exports.devServer = () => ({
   watch: true,
-  watchOptions: {
-    poll: true,
-    ignored: /node_modules/
-  },
+  // watchOptions: {
+  //   poll: true,
+  //   ignored: /node_modules/
+  // },
   devServer: {
+    // contentBase: path.join(__dirname, 'dist'),
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: process.env.PORT || 8080,
+    // port: 8080,
+    // allowedHosts: ['localhost'],
+    liveReload: true,
+    open: {
+      app: ['Google Chrome']
+    }
   },
 });
 
