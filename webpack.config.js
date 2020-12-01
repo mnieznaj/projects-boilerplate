@@ -1,23 +1,30 @@
 const { mode } = require("webpack-nano/argv");
 const { merge } = require("webpack-merge");
 const parts = require("./webpack.parts");
+const path = require("path");
 
 const commonConfig = merge([
-  { entry: ["./src"] },
-  parts.cleanWebpack(),
+  {
+    entry: ["./src"],
+    output: {
+      filename: '[name].[contenthash].min.js',
+      path: path.resolve(__dirname, 'dist')
+    }
+  },
   parts.loadImages({ limit: 15000 }),
   // { test: /\.svg$/, type: "asset" },
   parts.loadCSS(),
-  parts.extractCSS(),
   parts.sassLoader(),
   parts.loadJavaScript(),
   parts.loadTypeScript(),
 ]);
 
-const productionConfig = merge([]);
+const productionConfig = merge([
+  parts.extractCSS(),
+  parts.cleanWebpack(),
+]);
 
 const developmentConfig = merge([
-  { entry: ["webpack-plugin-serve/client"] },
   parts.devServer(),
   parts.urlLoader(),
 ]);

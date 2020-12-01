@@ -1,9 +1,4 @@
 const path = require("path");
-
-const { WebpackPluginServe } = require("webpack-plugin-serve");
-// const {
-  // MiniHtmlWebpackPlugin,
-// } = require("mini-html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
@@ -11,11 +6,7 @@ const APP_SOURCE = path.join(__dirname, "src");
 
 exports.loadTypeScript = () => ({
   devtool: 'inline-source-map',
-	entry: './src/index.ts',
-	output: {
-		filename: 'main.js',
-		path: path.resolve(__dirname, 'dist')
-	},
+	entry: './src/scripts/index.ts',
     module: {
         rules: [
             {
@@ -57,19 +48,17 @@ exports.urlLoader = () => ({
 
 exports.devServer = () => ({
   watch: true,
-  plugins: [
-    new WebpackPluginServe({
-      port: process.env.PORT || 8080,
-      static: "./dist", // Expose if output.path changes
-      liveReload: true,
-      waitForBuild: true,
-    }),
-  ],
+  watchOptions: {
+    poll: true,
+    ignored: /node_modules/
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: process.env.PORT || 8080,
+  },
 });
 
-// exports.page = ({ title }) => ({
-//   plugins: [new MiniHtmlWebpackPlugin({ context: { title } })],
-// });
 exports.svgrLoader = () => ({
   module: {
     rules:{
