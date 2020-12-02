@@ -17,17 +17,16 @@ exports.htmlWebpackPlugin = () => ({
 
 exports.loadTypeScript = () => ({
   devtool: 'inline-source-map',
-	entry: './src/scripts/index.ts',
     module: {
-        rules: [
-            {
-                test: /\.tsx?$/,
-                loader: 'ts-loader'
-            }
-        ]
-    },
-    resolve: {
-        extensions: [ '.ts', '.tsx', '.js' ]
+      rules: [
+          {
+              test: /\.tsx?$/,
+              loader: 'ts-loader'
+          }
+      ]
+  },
+  resolve: {
+      extensions: [ '.ts', '.tsx', '.js' ]
     }
 });
 
@@ -58,19 +57,14 @@ exports.urlLoader = () => ({
 });
 
 exports.devServer = () => ({
-  watch: true,
-  watchOptions: {
-    poll: true,
-    ignored: /node_modules/
-  },
   devServer: {
-    // contentBase: path.join(__dirname, 'dist'),
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: process.env.PORT || 8080,
-    // port: 8080,
-    // allowedHosts: ['localhost'],
-    liveReload: true,
+    contentBase: "dist",
+    hot: true,
+    port: 8080,
+    clientLogLevel: 'info',
+    historyApiFallback: {
+      index: 'index.html'
+    },
     open: {
       app: ['Google Chrome']
     }
@@ -146,7 +140,6 @@ exports.loadImages = ({ limit } = {}) => ({
     rules: [
       {
         test: /\.(png|jpg)$/,
-        type: "asset",
         parser: { dataUrlCondition: { maxSize: limit } },
       },
     ],

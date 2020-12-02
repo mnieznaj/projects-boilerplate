@@ -5,19 +5,20 @@ const path = require("path");
 
 const commonConfig = merge([
   {
-    entry: ["./src"],
+    entry: ["./src/scripts/index.ts"],
     output: {
-      filename: '[name].[contenthash].min.js',
-      path: path.resolve(__dirname, 'dist')
+      filename: '[name].[hash].min.js',
+      publicPath: "/",
+      path: path.resolve(__dirname, 'dist/')
     }
   },
   parts.htmlWebpackPlugin(),
   parts.loadImages({ limit: 15000 }),
-  // { test: /\.svg$/, type: "asset" },
   parts.loadCSS(),
   parts.sassLoader(),
   parts.loadJavaScript(),
   parts.loadTypeScript(),
+  parts.urlLoader(),
 ]);
 
 const productionConfig = merge([
@@ -26,8 +27,10 @@ const productionConfig = merge([
 ]);
 
 const developmentConfig = merge([
+  {
+    watch: true
+  },
   parts.devServer(),
-  parts.urlLoader(),
 ]);
 
 const getConfig = (mode) => {
